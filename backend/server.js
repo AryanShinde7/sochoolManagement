@@ -31,7 +31,7 @@ db.getConnection((err, connection) => {
 });
 
 
-app.post('/api/addSchool' , (req , res)=>{
+app.post('/addSchool' , (req , res)=>{
     const {name , address , longitude , latitude} = req.body;
 
     if (!name || !address || !latitude || !longitude) {
@@ -63,7 +63,7 @@ const calculateDistance = (lat1, lon1, lat2, lon2) => {
 };
 
 
-app.get('/api/getSchool', (req, res) => {
+app.get('/listSchools', (req, res) => {
     const { latitude, longitude } = req.query;
 
     // Check if latitude and longitude are provided
