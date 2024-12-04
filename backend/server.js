@@ -32,7 +32,7 @@ app.post('/api/addSchool' , (req , res)=>{
     db.query(add_query , [name , address , latitude , longitude] , (err , result) =>{
         if (err) {
             console.error(err);
-            return res.status(500).json({ message: 'Database error' });
+            return res.status(500).json({ message: err });
         }
         res.status(201).json({ message: 'School added successfully', schoolId: result.insertId });
     })
