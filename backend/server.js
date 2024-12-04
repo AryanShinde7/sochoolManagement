@@ -19,7 +19,6 @@ const db = mysql.createPool({
     queueLimit: 0,
     connectTimeout: 0, 
     acquireTimeout: 0,  
-    timeout: 0        
 });
 
 db.getConnection((err, connection) => {
