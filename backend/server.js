@@ -15,14 +15,19 @@ const db = mysql.createPool({
     password: process.env.DB_PASSWORD,
     database: process.env.DB_NAME,
     waitForConnections: true,
-    connectionLimit: 10,
+    connectionLimit: 1000,
     queueLimit: 0,
 });
 
-db.connect((err)=>{
-    if (err) throw err;
-    console.log('MySQL Connected...');
-})
+db.getConnection((err, connection) => {
+    if (err) {
+        console.error('Error connecting to MySQL:', err);
+        process.exit(1); // Exit if there's an error connecting to the database
+    }
+    if (connection) connection.release(); // Release the connection back to the pool
+    console.log('MySQL Pool Connected...');
+});
+
 
 app.post('/api/addSchool' , (req , res)=>{
     const {name , address , longitude , latitude} = req.body;
